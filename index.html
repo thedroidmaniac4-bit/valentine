@@ -64,12 +64,30 @@
   .initial-position {
     position: static !important;
   }
+
+  /* Success screen */
+  .success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background: #ff4d6d;
+    color: white;
+    padding: 20px;
+  }
+
+  .success h2 {
+    font-size: 30px;
+    margin: 20px 0;
+  }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="card" id="proposal">
   <h1>Will you be my Valentine, Chin? 💕</h1>
   <div class="buttons">
     <button id="yes">YES 💖</button>
@@ -77,11 +95,20 @@
   </div>
 </div>
 
+<div class="success" id="successScreen">
+  <div style="font-size:50px;">💘💘💘</div>
+  <h2>Chin, you just made me the happiest person ever!</h2>
+  <div style="font-size:60px;">😍</div>
+  <p style="font-size:22px;">Happy Valentine’s Day 💐</p>
+</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
   const yesBtn = document.getElementById("yes");
   const noBtn = document.getElementById("no");
+  const proposal = document.getElementById("proposal");
+  const successScreen = document.getElementById("successScreen");
   const card = document.querySelector(".card");
 
   let noClicks = 0;
@@ -97,7 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   noBtn.addEventListener("click", function() {
     noClicks++;
-
     noBtn.classList.remove("initial-position");
 
     const cardRect = card.getBoundingClientRect();
@@ -117,29 +143,8 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   yesBtn.addEventListener("click", function() {
-    document.body.innerHTML = `
-      <div style="
-        height:100vh;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        background:#ff4d6d;
-        color:white;
-        font-family:Comic Sans MS;
-        text-align:center;
-        padding:20px;
-      ">
-        <div style="font-size:50px;">💘💘💘</div>
-        <h1 style="font-size:30px; margin:20px 0;">
-          Chin, you just made me the happiest person ever!
-        </h1>
-        <div style="font-size:60px;">😍</div>
-        <p style="font-size:22px; margin-top:20px;">
-          Happy Valentine’s Day 💐
-        </p>
-      </div>
-    `;
+    proposal.style.display = "none";
+    successScreen.style.display = "flex";
   });
 
 });
