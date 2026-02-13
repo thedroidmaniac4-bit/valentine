@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Chin ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #ffdee9, #b5fffc);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+    color: #ff4d6d;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  button {
+    font-size: 20px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #yes {
+    background: #ff4d6d;
+    color: white;
+  }
+
+  #no {
+    background: #cccccc;
+    color: #333;
+    position: absolute;
+  }
+
+  .center-no {
+    position: static !important;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Will you be my Valentine, Chin? 💕</h1>
+  <div class="buttons">
+    <button id="yes">YES 💖</button>
+    <button id="no" class="center-no">NO 😒</button>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const yesBtn = document.getElementById("yes");
+  const noBtn = document.getElementById("no");
+  const card = document.querySelector(".card");
+
+  let noClicks = 0;
+
+  const messages = [
+    "Are you sure, Chin? 😏",
+    "Really sure?? 🤨",
+    "Think again 😌",
+    "Last chance 👀",
+    "You’re breaking my heart 💔",
+    "Okay now you're just teasing me 😭"
+  ];
+
+  noBtn.addEventListener("click", function() {
+    noClicks++;
+
+    // Remove centering class after first click
+    noBtn.classList.remove("center-no");
+
+    // Random position inside card boundaries
+    const cardRect = card.getBoundingClientRect();
+
+    const maxX = cardRect.width - noBtn.offsetWidth;
+    const maxY = cardRect.height - noBtn.offsetHeight;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+
+    noBtn.textContent = messages[Math.min(noClicks - 1, messages.length - 1)];
+
+    yesBtn.style.transform = "scale(" + (1 + noClicks * 0.25) + ")";
+  });
+
+  yesBtn.addEventListener("click", function() {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:#ff4d6d;
+        color:white;
+        font-family:Comic Sans MS;
+        text-align:center;
+        padding:20px;
+      ">
+        <h1 style="font-size:32px;">
+          YES!!! 💘💘💘<br><br>
+          Chin, you just made me the happiest person ever 😍<br>
+          Happy Valentine’s Day 💐
+        </h1>
+      </div>
+    `;
+  });
+
+});
+</script>
+
+</body>
+</html>
