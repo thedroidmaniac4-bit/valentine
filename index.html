@@ -24,22 +24,26 @@
     text-align: center;
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     position: relative;
+    width: 90%;
+    max-width: 400px;
   }
 
   h1 {
     margin-bottom: 30px;
     color: #ff4d6d;
+    font-size: 24px;
   }
 
   .buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
+    position: relative;
   }
 
   button {
-    font-size: 20px;
-    padding: 12px 28px;
+    font-size: 18px;
+    padding: 12px 24px;
     border-radius: 30px;
     border: none;
     cursor: pointer;
@@ -57,7 +61,7 @@
     position: absolute;
   }
 
-  .center-no {
+  .initial-position {
     position: static !important;
   }
 </style>
@@ -69,7 +73,7 @@
   <h1>Will you be my Valentine, Chin? 💕</h1>
   <div class="buttons">
     <button id="yes">YES 💖</button>
-    <button id="no" class="center-no">NO 😒</button>
+    <button id="no" class="initial-position">NO 😒</button>
   </div>
 </div>
 
@@ -94,12 +98,9 @@ document.addEventListener("DOMContentLoaded", function() {
   noBtn.addEventListener("click", function() {
     noClicks++;
 
-    // Remove centering class after first click
-    noBtn.classList.remove("center-no");
+    noBtn.classList.remove("initial-position");
 
-    // Random position inside card boundaries
     const cardRect = card.getBoundingClientRect();
-
     const maxX = cardRect.width - noBtn.offsetWidth;
     const maxY = cardRect.height - noBtn.offsetHeight;
 
@@ -109,7 +110,8 @@ document.addEventListener("DOMContentLoaded", function() {
     noBtn.style.left = randomX + "px";
     noBtn.style.top = randomY + "px";
 
-    noBtn.textContent = messages[Math.min(noClicks - 1, messages.length - 1)];
+    noBtn.textContent =
+      messages[Math.min(noClicks - 1, messages.length - 1)];
 
     yesBtn.style.transform = "scale(" + (1 + noClicks * 0.25) + ")";
   });
@@ -119,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <div style="
         height:100vh;
         display:flex;
+        flex-direction:column;
         align-items:center;
         justify-content:center;
         background:#ff4d6d;
@@ -127,11 +130,14 @@ document.addEventListener("DOMContentLoaded", function() {
         text-align:center;
         padding:20px;
       ">
-        <h1 style="font-size:32px;">
-          YES!!! 💘💘💘<br><br>
-          Chin, you just made me the happiest person ever 😍<br>
-          Happy Valentine’s Day 💐
+        <div style="font-size:50px;">💘💘💘</div>
+        <h1 style="font-size:30px; margin:20px 0;">
+          Chin, you just made me the happiest person ever!
         </h1>
+        <div style="font-size:60px;">😍</div>
+        <p style="font-size:22px; margin-top:20px;">
+          Happy Valentine’s Day 💐
+        </p>
       </div>
     `;
   });
